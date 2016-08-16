@@ -1,0 +1,11 @@
+@for $i from 1 through 6 {
+  h#{$i} {
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+}
+
+.container-fluid {
+  max-width: 400px;
+  margin: 0 auto;
+}

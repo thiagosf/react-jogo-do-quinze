@@ -1,0 +1,41 @@
+.puzzle-box {
+  overflow: hidden;
+  padding: 2px;
+  background: black;
+  position: relative;
+  width: 400px;
+  height: 400px;
+  box-shadow: black 0 0 0 2px;
+  .puzzle-item {
+    transition: all 500ms ease-in-out;
+    width: 25%;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    $k: 0;
+    @for $i from 0 through 3 {
+      @for $j from 0 through 3 {
+        $k: $k + 1;
+        &.puzzle-item-#{$k} {
+          top: ($i * 100) + px;
+          left: ($j * 100) + px;
+        }
+      }
+    }
+  }
+  .puzzle-item-number {
+    background: white;
+    padding: 28px 0;
+    font-size: 22px;
+    line-height: 2;
+    font-weight: 300;
+    height: 100px;
+    box-shadow: black 0 0 0 2px inset;
+  }
+}
+
+.start-game-box {
+  margin-top: 20px;
+  text-align: center;
+}
