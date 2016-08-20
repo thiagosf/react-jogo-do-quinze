@@ -25,6 +25,7 @@
   "author": "Thiago Silva Ferreira",
   "license": "MIT",
   "dependencies": {
+    "classnames": "^2.2.5",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
