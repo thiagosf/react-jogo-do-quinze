@@ -9,9 +9,24 @@ class PuzzleControlsContainer extends React.Component {
     e.preventDefault()
     if (validMove(direction, this.props.puzzle)) {
       const { from_position, to_position } = getFromTo(direction, this.props.puzzle)
-      console.log("[", this.props.puzzle.blank_position, ']');
       this.props.movePuzzleItem(direction, from_position, to_position)
     }
+  }
+  componentDidMount() {
+    document.querySelector('body').addEventListener('keydown', e => {
+      let direction
+
+      switch(e.which) {
+        case 37: direction = 'left'; break;
+        case 39: direction = 'right'; break;
+        case 38: direction = 'top'; break;
+        case 40: direction = 'bottom'; break;
+      }
+
+      if (direction) {
+        this.handleControl(direction, e)
+      }
+    })
   }
   render() {
     return (

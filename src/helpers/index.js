@@ -46,14 +46,14 @@ export function validMove(direction, options) {
     valids = ['right', 'top']
   }
 
-  // nao eh canto e nao tem abaixo (14,15) = esquerdo,topo,direito
-  else if ((blank_position + multiple + 1) > pieces) {
-    valids = ['left', 'right', 'bottom']
-  }
-
   // canto esquerdo e nao tem abaixo (13) = topo,direito
   else if ((blank_position + multiple - 1) == pieces) {
-    valids = ['right', 'bottom']
+    valids = ['left', 'bottom']
+  }
+
+  // nao eh canto e nao tem abaixo (14,15) = esquerdo,topo,direito
+  else if ((blank_position + multiple) > pieces) {
+    valids = ['left', 'right', 'bottom']
   }
 
   // canto direito tem abaixo e acima (8,12) = topo,esquerdo,abaixo
@@ -62,12 +62,17 @@ export function validMove(direction, options) {
   }
 
   // canto esquerdo tem abaixo e acima (5,9) = topo,direito,abaixo
-  else if ((blank_position - 1) % multiple == 0 && (blank_position - 1) != multiple) {
+  else if ((blank_position - 1) % multiple == 0) {
     valids = ['left', 'bottom', 'top']
   }
 
   // tem acima, abaixo, esquerdo e direito (6,7,10,11) = todas posicoes
-  else {
+  else if (
+    blank_position > multiple &&
+    blank_position < (pieces - multiple) &&
+    blank_position % multiple != 0 && 
+    ((blank_position - 1) % multiple != 0 && (blank_position - 1) != multiple)
+  ) {
     valids = ['right', 'left', 'bottom', 'top']
   }
 
