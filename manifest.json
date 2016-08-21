@@ -4,8 +4,8 @@
   "theme_color": "#643da9",
   "background_color": "#643da9",
   "display": "fullscreen",
-  "Scope": "index.html",
-  "start_url": "index.html",
+  "Scope": "https://thiagosf.github.io/react-jogo-do-quinze/",
+  "start_url": "https://thiagosf.github.io/react-jogo-do-quinze/",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
