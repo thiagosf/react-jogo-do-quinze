@@ -1,11 +1,10 @@
 {
   "name": "Jogo do Quinze",
-  "short_name": "Jogo do 15",
+  "short_name": "Jogo do Quinze",
   "theme_color": "#643da9",
   "background_color": "#643da9",
-  "display": "fullscreen",
-  "Scope": "https://thiagosf.github.io/react-jogo-do-quinze/",
-  "start_url": "https://thiagosf.github.io/react-jogo-do-quinze/",
+  "display": "standalone",
+  "start_url": "/index.html?homescreen=1",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
@@ -47,6 +46,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "splash_pages": null
+  ]
 }
