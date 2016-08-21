@@ -10,15 +10,21 @@ const initialState = {
   started: false,
   starting: false,
   winner: false,
-  resolution_movements: [],
-  resolving: false
+  winner_computer: false,
+  resolving_movements: [],
+  resolving: false,
+  reset: false,
+  moves: 0,
+  perfect_moves: 0,
+  seconds: 0
 }
 
 function puzzle(state = initialState, action) {
   switch (action.type) {
     case 'STARTING': 
       return Object.assign({}, state, {
-        starting: true
+        starting: true,
+        seconds: 0
       })
 
     case 'START': 
@@ -26,7 +32,11 @@ function puzzle(state = initialState, action) {
         started: true,
         starting: false,
         winner: false,
-        resolution_movements: action.resolution_movements
+        resolving_movements: action.resolving_movements,
+        reset: false,
+        winner_computer: false,
+        moves: 0,
+        perfect_moves: action.resolving_movements.length
       })
 
     case 'START_ITEMS': 
@@ -41,7 +51,8 @@ function puzzle(state = initialState, action) {
         blank_position: action.from_position,
         from_position: action.from_position,
         to_position: action.to_position,
-        resolution_movements: [],
+        resolving_movements: action.resolving_movements,
+        moves: action.moves,
         puzzle_items: state.puzzle_items.map(item => {
           if (action.from_position == item.position) {
             item.position = action.to_position
@@ -54,23 +65,32 @@ function puzzle(state = initialState, action) {
       return Object.assign({}, state, {
         winner: true,
         started: false,
-        resolution_movements: []
+        resolving_movements: []
       })
 
     case 'RESOLVING':
       return Object.assign({}, state, {
-        resolving: true
+        resolving: true,
+        winner_computer: true
       })
 
     case 'RESOLVED':
       return Object.assign({}, state, {
-        resolving: false
+        resolving: false,
+        resolving_movements: []
       })
 
     case 'RESET':
       return Object.assign({}, state, {
         puzzle_items: action.puzzle_items,
-        resolution_movements: []
+        resolving_movements: [],
+        reset: true,
+        blank_position: initialState.blank_position
+      })
+
+    case 'TICK': 
+      return Object.assign({}, state, {
+        seconds: state.seconds + 1
       })
 
     default:

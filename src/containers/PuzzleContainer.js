@@ -2,8 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { startPuzzleItems, checkWinner } from '../actions/puzzle'
-import { Puzzle } from '../components'
+import { Puzzle, PuzzleStats } from '../components'
 import { PuzzleControlsContainer } from './'
+import { directions, getFromTo } from '../helpers'
 
 class PuzzleContainer extends React.Component {
   componentDidMount() {
@@ -12,16 +13,34 @@ class PuzzleContainer extends React.Component {
   componentWillReceiveProps() {
     this.props.checkWinner()
   }
+  onClickItem(position) {
+    const { puzzle } = this.props
+    let { moves } = puzzle
+    
+    directions.map(direction => {
+      const { from_position, to_position } = getFromTo(direction, puzzle)
+      if (from_position == position) {
+        this.refs.puzzleControlsContainer.dispatchProps.movePuzzleItem(
+          direction,
+          from_position,
+          to_position,
+          ++moves
+        )
+      }
+    })
+  }
   render() {
     const congratulations = classNames({
       'winner-message': true,
-      on: this.props.puzzle.winner
+      'on': this.props.puzzle.winner,
+      'computer': this.props.puzzle.winner_computer
     })
     return (
       <div className="puzzle-container-box">
-        <h2 className={congratulations}>Parabéns! Você ganhou!</h2>
-        <Puzzle puzzle={this.props.puzzle} />
-        <PuzzleControlsContainer />
+        <h2 className={congratulations}>Parabéns! <span>Você ganhou!</span></h2>
+        <Puzzle puzzle={this.props.puzzle} onClickItem={this.onClickItem.bind(this)} />
+        <PuzzleStats puzzle={this.props.puzzle} />
+        <PuzzleControlsContainer ref="puzzleControlsContainer" />
       </div>
     );
   }

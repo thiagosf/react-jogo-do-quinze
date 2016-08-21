@@ -19,6 +19,7 @@ export default class Puzzle extends React.Component {
               key={item.id} 
               from_position={this.props.puzzle.from_position}
               to_position={this.props.puzzle.to_position}
+              onClick={this.props.onClickItem.bind(this, item.position)}
               {...item} 
               />
           )

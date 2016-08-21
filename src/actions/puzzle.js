@@ -1,4 +1,4 @@
-import { validMove, getFromTo } from '../helpers'
+import { directions, validMove, getFromTo } from '../helpers'
 
 export function startPuzzleItems () {
   var puzzle_items = []
@@ -11,12 +11,21 @@ export function startPuzzleItems () {
   }
 }
 
-export function movePuzzleItem (direction, from_position, to_position) {
-  return {
-    type: 'MOVE_PUZZLE_ITEM',
-    direction,
-    from_position,
-    to_position
+export function movePuzzleItem (direction, from_position, to_position, moves = 0) {
+  return (dispatch, getState) => {
+    let resolving_movements = [].concat(
+      getState().puzzle.resolving_movements
+    ).reverse()
+    resolving_movements.push({ direction: inverseDirection(direction) })
+    resolving_movements = resolving_movements.reverse()
+    dispatch({
+      type: 'MOVE_PUZZLE_ITEM',
+      direction,
+      from_position,
+      to_position,
+      resolving_movements,
+      moves
+    })
   }
 }
 
@@ -27,7 +36,12 @@ export function checkWinner() {
     const count = puzzle_items.filter(item => {
       return item.id == item.position
     }).length
-    if (count == (puzzle.pieces - 1) && puzzle.started && !puzzle.winner) {
+    if (
+      count == (puzzle.pieces - 1) && 
+      puzzle.started && 
+      !puzzle.winner && 
+      !puzzle.reset
+    ) {
       dispatch(winner())
     }
   }
@@ -37,24 +51,15 @@ export function start({ level = 1 }) {
   return (dispatch, getState) => {
     dispatch({ type: 'STARTING' })
 
-    const directions = ['left', 'right', 'top', 'bottom']
+    const top = document.querySelector('.puzzle-container-box').offsetTop - 20
+    window.scrollTo(0, top)
+
     const movements_count = getMovementsCount(level)
     const velocity = 100
-    let movements = []
-    let resolution_movements = []
     let puzzle = Object.assign({}, getState().puzzle)
+    let movements = []
+    let resolving_movements = puzzle.resolving_movements.reverse()
     let last_movement = null
-
-    const inverseDirection = (direction) => {
-      let inverse
-      switch(direction) {
-        case 'left':   inverse = 'right'; break;
-        case 'right':  inverse = 'left'; break;
-        case 'top':    inverse = 'bottom'; break;
-        case 'bottom': inverse = 'top'; break;
-      }
-      return inverse
-    }
 
     for (let i = 0; i < movements_count; i++) {
       let rand = Math.floor(Math.random() * directions.length)
@@ -71,7 +76,7 @@ export function start({ level = 1 }) {
             to_position: to_position
           })
 
-          resolution_movements.push({
+          resolving_movements.push({
             direction: inverseDirection(direction)
           })
 
@@ -90,18 +95,19 @@ export function start({ level = 1 }) {
         movePiece(dispatch, item)
       } else {
         clearInterval(interval)
-        dispatch({ type: 'START', resolution_movements: resolution_movements.reverse() })
+        dispatch({ type: 'START', resolving_movements: resolving_movements.reverse() })
+        createTimer(dispatch, getState)
       }
     }, velocity)
   }
 }
 
-export function resolution() {
+export function solve() {
   return (dispatch, getState) => {
     dispatch({ type: 'RESOLVING' })
 
     let puzzle = Object.assign({}, getState().puzzle)
-    const movements = [].concat(puzzle.resolution_movements)
+    const movements = [].concat(puzzle.resolving_movements)
     const velocity = 100
 
     let interval = setInterval(() => {
@@ -123,7 +129,6 @@ export function resolution() {
 export function reset() {
   return dispatch => {
     let options = startPuzzleItems()
-    console.log(Object.assign(options, { type: 'RESET' }));
     dispatch(Object.assign(options, { type: 'RESET' }))
   }
 }
@@ -145,11 +150,33 @@ function getMovementsCount(level) {
   return movements_count
 }
 
-
 function movePiece(dispatch, item) {
   dispatch(movePuzzleItem(
     item.direction,
     item.from_position,
     item.to_position
   ))
+}
+
+function inverseDirection(direction)  {
+  let inverse
+  switch(direction) {
+    case 'left':   inverse = 'right'; break;
+    case 'right':  inverse = 'left'; break;
+    case 'top':    inverse = 'bottom'; break;
+    case 'bottom': inverse = 'top'; break;
+  }
+  return inverse
+}
+
+function createTimer(dispatch, getState) {
+  let interval = null
+  interval = setInterval(() => {
+    const { puzzle } = getState()
+    if (!puzzle.winner) {
+      dispatch({ type: 'TICK' })
+    } else {
+      clearInterval(interval)
+    }
+  }, 1000)
 }

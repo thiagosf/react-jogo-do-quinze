@@ -9,7 +9,8 @@ class PuzzleControlsContainer extends React.Component {
     e.preventDefault()
     if (validMove(direction, this.props.puzzle)) {
       const { from_position, to_position } = getFromTo(direction, this.props.puzzle)
-      this.props.movePuzzleItem(direction, from_position, to_position)
+      let { moves } = this.props.puzzle
+      this.props.movePuzzleItem(direction, from_position, to_position, ++moves)
     }
   }
   componentDidMount() {
@@ -50,8 +51,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    movePuzzleItem: (direction, from_position, to_position) => {
-      return dispatch(movePuzzleItem(direction, from_position, to_position))
+    movePuzzleItem: (direction, from_position, to_position, moves) => {
+      return dispatch(movePuzzleItem(direction, from_position, to_position, moves))
     }
   }
 }

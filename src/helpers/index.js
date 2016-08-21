@@ -1,3 +1,5 @@
+export const directions = ['left', 'right', 'top', 'bottom']
+
 export function getFromTo(direction, options) {
   const { blank_position, pieces, multiple } = options
   let from_position, to_position;
