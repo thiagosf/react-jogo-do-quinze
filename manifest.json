@@ -4,8 +4,8 @@
   "theme_color": "#643da9",
   "background_color": "#643da9",
   "display": "fullscreen",
-  "Scope": "/react-jogo-do-quinze/",
-  "start_url": "/react-jogo-do-quinze/",
+  "Scope": "index.html",
+  "start_url": "index.html",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
