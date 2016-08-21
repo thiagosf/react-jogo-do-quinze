@@ -32,12 +32,16 @@ $puzzle_box_color: #37474f;
       @for $j from 0 through 3 {
         $k: $k + 1;
         &.puzzle-item-#{$k} {
-          top: ($i * 70) + px;
-          left: ($j * 70) + px;
+          transform: translate($j * 70px, $i * 70px);
           @media #{$medium-up} {
-            top: ($i * 100) + px;
-            left: ($j * 100) + px;
+            transform: translate($j * 100px, $i * 100px);
           }
+          // top: ($i * 70) + px;
+          // left: ($j * 70) + px;
+          // @media #{$medium-up} {
+          //   top: ($i * 100) + px;
+          //   left: ($j * 100) + px;
+          // }
         }
       }
     }
