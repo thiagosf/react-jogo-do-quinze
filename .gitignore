@@ -1,2 +1,10 @@
 .azk
 .DS_Store
+scss
+src
+.editorconfig
+Azkfile.js
+LICENSE
+package.json
+README.md
+webpack.config.js
