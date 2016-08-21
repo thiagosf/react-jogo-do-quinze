@@ -4,10 +4,7 @@
   "theme_color": "#643da9",
   "background_color": "#643da9",
   "display": "standalone",
-  "start_url": "/index.html?homescreen=1",
-  "permissions": [
-    "https://github.com/"
-  ],
+  "homepage_url": "https://thiagosf.github.io/react-jogo-do-quinze/index.html?homescreen=1",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
