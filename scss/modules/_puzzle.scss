@@ -36,12 +36,6 @@ $puzzle_box_color: #37474f;
           @media #{$medium-up} {
             transform: translate($j * 100px, $i * 100px);
           }
-          // top: ($i * 70) + px;
-          // left: ($j * 70) + px;
-          // @media #{$medium-up} {
-          //   top: ($i * 100) + px;
-          //   left: ($j * 100) + px;
-          // }
         }
       }
     }

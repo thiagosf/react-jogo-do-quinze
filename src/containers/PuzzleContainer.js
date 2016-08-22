@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { startPuzzleItems, checkWinner } from '../actions/puzzle'
+import { play, stop } from '../actions/sound'
 import { Puzzle, PuzzleStats } from '../components'
 import { PuzzleControlsContainer } from './'
 import { directions, getFromTo } from '../helpers'
@@ -26,6 +27,8 @@ class PuzzleContainer extends React.Component {
           to_position,
           ++moves
         )
+        this.props.stop()
+        this.props.play('puzzle_move')
       }
     })
   }
@@ -59,6 +62,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     checkWinner: () => {
       return dispatch(checkWinner())
+    },
+    play: (sound) => {
+      return dispatch(play(sound))
+    },
+    stop: () => {
+      return dispatch(stop())
     }
   }
 }

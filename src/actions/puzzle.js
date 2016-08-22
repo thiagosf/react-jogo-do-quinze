@@ -43,6 +43,10 @@ export function checkWinner() {
       !puzzle.reset
     ) {
       dispatch(winner())
+      setTimeout(() => {
+        dispatch({ type: 'STOP' })
+        dispatch({ type: 'PLAY', sound: 'winner' })
+      }, 200)
     }
   }
 }
@@ -151,6 +155,8 @@ function getMovementsCount(level) {
 }
 
 function movePiece(dispatch, item) {
+  dispatch({ type: 'STOP' })
+  dispatch({ type: 'PLAY', sound: 'puzzle_move' })
   dispatch(movePuzzleItem(
     item.direction,
     item.from_position,

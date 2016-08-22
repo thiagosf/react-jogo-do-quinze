@@ -14,7 +14,8 @@ export default class PuzzleControls extends Component {
         <span> </span>
         <a href="#" onClick={this.props.goRight} className="btn btn-info">&#8594;</a>
         <p className="tip-keyboard">
-          <small><em>(ou use o teclado)</em></small>
+          <small className="visible-xs visible-sm"><em>(ou toque as peças)</em></small>
+          <small className="hidden-xs hidden-sm"><em>(ou use o teclado)</em></small>
         </p>
       </div>
     )

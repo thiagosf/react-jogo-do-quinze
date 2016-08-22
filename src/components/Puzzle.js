@@ -8,8 +8,8 @@ export default class Puzzle extends React.Component {
   render() {
     const puzzle_box = classNames({
       'puzzle-box': true,
-      starting: this.props.puzzle.starting,
-      resolving: this.props.puzzle.resolving
+      'starting': this.props.puzzle.starting,
+      'resolving': this.props.puzzle.resolving
     })
     return (
       <div className={puzzle_box}>

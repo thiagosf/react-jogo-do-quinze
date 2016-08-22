@@ -1,6 +1,7 @@
 // Bootstrap custom
 $border-radius-base: 2px;
 $border-radius-large: 2px;
+$border-radius-small: 2px;
 $brand-primary: #7e57c2;
 $font-family-sans-serif: "Hind Guntur", Helvetica, Arial, sans-serif;
 
@@ -57,4 +58,9 @@ $font-family-sans-serif: "Hind Guntur", Helvetica, Arial, sans-serif;
 
 .btn {
   padding-bottom: 3px;
+}
+
+.btn-xs {
+  padding-top: 3px;
+  padding-bottom: 0;
 }
