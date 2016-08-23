@@ -55,7 +55,7 @@ export function start({ level = 1 }) {
   return (dispatch, getState) => {
     dispatch({ type: 'STARTING' })
 
-    const top = document.querySelector('.puzzle-container-box').offsetTop - 20
+    const top = document.querySelector('.start-puzzle-box').offsetTop + 15
     window.scrollTo(0, top)
 
     const movements_count = getMovementsCount(level)
@@ -134,6 +134,13 @@ export function reset() {
   return dispatch => {
     let options = startPuzzleItems()
     dispatch(Object.assign(options, { type: 'RESET' }))
+  }
+}
+
+export function changePuzzleType (puzzle_type) {
+  return {
+    type: 'CHANGE_PUZZLE_TYPE',
+    puzzle_type
   }
 }
 

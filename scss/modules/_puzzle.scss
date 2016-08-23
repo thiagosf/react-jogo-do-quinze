@@ -16,11 +16,18 @@ $puzzle_box_color: #37474f;
   &.starting,
   &.resolving {
     .puzzle-item {
-      transition: all 100ms linear;
+      transition: transform 100ms linear;
+    }
+  }
+  &.puzzle-image-box {
+    background: black;
+    box-shadow: black 0 0 0 2px;
+    .puzzle-label {
+      box-shadow: black 0 0 0 2px inset;
     }
   }
   .puzzle-item {
-    transition: all 300ms ease-out;
+    transition: transform 300ms ease-out;
     width: 25%;
     text-align: center;
     position: absolute;
@@ -40,18 +47,40 @@ $puzzle_box_color: #37474f;
       }
     }
     &.valid {
-      .puzzle-item-number {
+      .puzzle-label {
         background: #ffffcc;
       }
     }
     &:hover {
-      .puzzle-item-number {
+      .puzzle-label {
         background: #cfd8dc;
       }
     }
+    &.puzzle-item-image {
+      background-size: 280px 280px;
+      @media #{$medium-up} {
+        background-size: 400px 400px;
+      }
+      $k: 0;
+      @for $i from 0 through 3 {
+        @for $j from 0 through 3 {
+          $k: $k + 1;
+          &.puzzle-item-image-#{$k} {
+            background-position: $j * -70px $i * -70px;
+            @media #{$medium-up} {
+              background-position: $j * -100px $i * -100px;
+            }
+          }
+        }
+      }
+      .puzzle-label {
+        text-indent: -9999em;
+        overflow: hidden;
+        background: transparent;
+      }
+    }
   }
-  .puzzle-item-number {
-    transition: all 200ms;
+  .puzzle-label {
     background: white;
     font-size: 22px;
     font-weight: 300;

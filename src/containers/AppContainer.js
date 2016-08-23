@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { start, solve } from '../actions/puzzle'
+import { start, solve, changePuzzleType } from '../actions/puzzle'
 import { enable, disable } from '../actions/sound'
 import { PuzzleContainer } from './'
 
@@ -11,6 +11,14 @@ class AppContainer extends React.Component {
     if (resolving_movements.length > 0 && !resolving) {
       this.props.solve()
     }
+  }
+  puzzleTypeClassname(puzzle_type)  {
+    return classNames({
+      'btn': true,
+      'btn-xs': true,
+      'btn-default': true,
+      'disabled': puzzle_type == this.props.puzzle.puzzle_type
+    })
   }
   render() {
     const { resolving_movements, resolving } = this.props.puzzle
@@ -54,6 +62,17 @@ class AppContainer extends React.Component {
                 </span>
               </p>
             </div>
+            <div className="col-xs-12">
+              <small>Tipo</small>
+              <br />
+              <span className={this.puzzleTypeClassname('number')} onClick={this.props.changePuzzleType.bind(this, 'number')}>Número</span>
+              <span> </span>
+              <span className={this.puzzleTypeClassname('image-1')} onClick={this.props.changePuzzleType.bind(this, 'image-1')}>Imagem 1</span>
+              <span> </span>
+              <span className={this.puzzleTypeClassname('image-2')} onClick={this.props.changePuzzleType.bind(this, 'image-2')}>Imagem 2</span>
+              <span> </span>
+              <span className={this.puzzleTypeClassname('image-3')} onClick={this.props.changePuzzleType.bind(this, 'image-3')}>Imagem 3</span>
+            </div>
           </div>
         </div>
         <PuzzleContainer />
@@ -88,6 +107,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     disableSound: () => {
       return dispatch(disable())
+    },
+    changePuzzleType: (puzzle_type) => {
+      return dispatch(changePuzzleType(puzzle_type))
     }
   }
 }

@@ -14,7 +14,8 @@ const initialState = {
   reset: false,
   moves: 0,
   perfect_moves: 0,
-  seconds: 0
+  seconds: 0,
+  puzzle_type: 'number'
 }
 
 export default function puzzle(state = initialState, action) {
@@ -89,6 +90,11 @@ export default function puzzle(state = initialState, action) {
     case 'TICK': 
       return Object.assign({}, state, {
         seconds: state.seconds + 1
+      })
+
+    case 'CHANGE_PUZZLE_TYPE': 
+      return Object.assign({}, state, {
+        puzzle_type: action.puzzle_type
       })
 
     default:
