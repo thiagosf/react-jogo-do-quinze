@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { start, solve, changePuzzleType } from '../actions/puzzle'
 import { enable, disable } from '../actions/sound'
 import { PuzzleContainer } from './'
+import { Icon } from '../components'
 
 class AppContainer extends React.Component {
   resolving(e) {
@@ -36,6 +37,9 @@ class AppContainer extends React.Component {
     })
     return (
       <div className="container-fluid">
+        <a href="https://github.com/thiagosf/react-jogo-do-quinze/" className="go-to-github">
+          <Icon name="github" />
+        </a>
         <h1>Jogo do Quinze</h1>
         <p>Teste suas <strong>habilidades cerebrais</strong> com esse incrível quebra-cabeças!</p>
         <div className="start-puzzle-box">
