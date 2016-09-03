@@ -30,3 +30,13 @@ footer {
     fill: currentColor;
   }
 }
+
+.locales-box {
+  text-align: right;
+  color: #999;
+  a {
+    color: #777;
+    padding: 10px 5px;
+    display: inline-block;
+  }
+}

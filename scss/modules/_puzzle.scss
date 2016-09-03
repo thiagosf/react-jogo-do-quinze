@@ -115,11 +115,11 @@ $puzzle_box_color: #37474f;
     display:block;
   }
   &.computer {
-    span {
+    span.you-win {
       text-decoration: line-through;
     }
   }
-  span {
+  span.you-win {
     font-weight: 600;
   }
 }
@@ -129,7 +129,7 @@ $puzzle_box_color: #37474f;
   margin-top: 20px;
   p {
     margin: 0;
-    span {
+    span.highlight {
       font-weight: 600;
       color: $brand-primary;
     }
@@ -137,7 +137,7 @@ $puzzle_box_color: #37474f;
   .puzzle-time {
     font-weight: 300;
     margin: 20px 0 0 0;
-    span {
+    span.highlight {
       font-weight: 500;
     }
   }

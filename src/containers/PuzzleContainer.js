@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { FormattedMessage } from 'react-intl'
 import { startPuzzleItems, checkWinner } from '../actions/puzzle'
 import { play, stop } from '../actions/sound'
 import { Puzzle, PuzzleStats } from '../components'
@@ -40,7 +41,18 @@ class PuzzleContainer extends React.Component {
     })
     return (
       <div className="puzzle-container-box">
-        <h2 className={congratulations}>Parabéns! <span>Você ganhou!</span></h2>
+        <h2 className={congratulations}>
+          <FormattedMessage 
+            id="congratulations" 
+            values={{ 
+              you_win: (
+                <span className="you-win">
+                  <FormattedMessage id="you_win" />
+                </span>
+              )
+            }}
+            />
+        </h2>
         <Puzzle puzzle={this.props.puzzle} onClickItem={this.onClickItem.bind(this)} />
         <PuzzleStats puzzle={this.props.puzzle} />
         <PuzzleControlsContainer ref="puzzleControlsContainer" />

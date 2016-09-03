@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 export default class PuzzleControls extends Component {
   render() {
@@ -14,8 +15,12 @@ export default class PuzzleControls extends Component {
         <span> </span>
         <a href="#" onClick={this.props.goRight} className="btn btn-info">&#8594;</a>
         <p className="tip-keyboard">
-          <small className="visible-xs visible-sm"><em>(ou toque as peças)</em></small>
-          <small className="hidden-xs hidden-sm"><em>(ou use o teclado)</em></small>
+          <small className="visible-xs visible-sm">
+            <em><FormattedMessage id="or_touch" /></em>
+          </small>
+          <small className="hidden-xs hidden-sm">
+            <em><FormattedMessage id="or_keyboard" /></em>
+          </small>
         </p>
       </div>
     )

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider, connect } from 'react-redux'
+import { connect } from 'react-redux'
+import { Provider } from 'react-intl-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
